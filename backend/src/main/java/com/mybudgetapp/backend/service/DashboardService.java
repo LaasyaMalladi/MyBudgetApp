@@ -50,6 +50,7 @@ public class DashboardService {
         // Total Recurring Savings
         BigDecimal totalRecurringSavings = recurringSavingsRepository.findByUserIdAndActive(userId, true)
                 .stream()
+                .filter(r -> !r.getStartDate().isAfter(start))
                 .map(r -> r.getAmount())
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
