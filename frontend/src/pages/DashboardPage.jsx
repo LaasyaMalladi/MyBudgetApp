@@ -70,6 +70,9 @@ function DashboardPage() {
             {Math.round((data.totalSaved / data.expectedIncome) * 100)}% of
             income
           </p>
+          <p className="text-xl font-medium text-green-700">
+            ₹{data.totalSaved}
+          </p>
         </div>
         <div className="bg-gray-50 rounded-lg p-3">
           <p className="text-xs text-gray-500 mb-1">CC due next month</p>
