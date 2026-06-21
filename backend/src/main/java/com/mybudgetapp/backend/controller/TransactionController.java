@@ -33,8 +33,8 @@ public class TransactionController {
     }
 
     @GetMapping("/user/{userId}/month")
-    public List<Transaction> getTransactionsByMonth(@PathVariable Long userId, @RequestParam LocalDate month, @RequestParam LocalDate year) {
-        return transactionService.getTransactionByMonth(userId, month, year);
+    public List<Transaction> getTransactionsByMonth(@PathVariable Long userId, @RequestParam LocalDate start, @RequestParam LocalDate end) {
+        return transactionService.getTransactionByMonth(userId, start, end);
     }
 
     @PostMapping
