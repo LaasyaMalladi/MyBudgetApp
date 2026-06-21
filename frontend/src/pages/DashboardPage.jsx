@@ -41,7 +41,7 @@ function DashboardPage() {
         <div className="mt-3">
           <div className="flex justify-between text-xs text-gray-500 mb-1">
             <span>₹{data.totalSpent} spent</span>
-            <span>₹{data.availableBudget} left</span>
+            <span>₹{data.remainingBudget} left</span>
           </div>
           <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
             <div
