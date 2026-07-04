@@ -45,7 +45,15 @@ public class DashboardService {
         // Expected Income for the month
         BigDecimal expectedIncome = monthlyBudgetRepository.findByUserIdAndMonthAndYear(userId, month, year)
                 .map(b -> b.getExpectedIncome())
-                .orElse(BigDecimal.ZERO);
+                .orElseGet(() -> {
+                        // no budget set for month, then get it from last month
+                        int lastMonth = month == 1 ? 12 : month - 1;
+                        int lastMonthYear = month == 1 ? year - 1 : year;
+
+                        return monthlyBudgetRepository.findByUserIdAndMonthAndYear(userId, lastMonth, lastMonthYear)
+                                .map(b -> b.getExpectedIncome())
+                                .orElse(BigDecimal.ZERO);
+                });
         
         // Total Recurring Savings
         BigDecimal totalRecurringSavings = recurringSavingsRepository.findByUserIdAndActive(userId, true)

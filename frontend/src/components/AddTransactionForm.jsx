@@ -1,12 +1,16 @@
 import { useState } from "react";
 import { createTransaction } from "../services/transactionService";
+import useCategories from "../hooks/useCategories";
 
 function AddTransactionForm({ userId, onSuccess, onCancel }) {
+  const { categories } = useCategories(userId);
+
   const [form, setForm] = useState({
     amount: "",
     date: new Date().toISOString().split("T")[0],
     description: "",
     paymentType: "UPI",
+    categoryId: "",
   });
   const [saving, setSaving] = useState(false);
 
@@ -20,6 +24,7 @@ function AddTransactionForm({ userId, onSuccess, onCancel }) {
         date: form.date,
         description: form.description,
         paymentType: form.paymentType,
+        category: form.categoryId ? { id: parseInt(form.categoryId) } : null,
       });
       onSuccess();
     } catch (err) {
@@ -52,6 +57,18 @@ function AddTransactionForm({ userId, onSuccess, onCancel }) {
         onChange={(e) => setForm({ ...form, description: e.target.value })}
         className="border border-gray-200 rounded-lg py-2 pl-2 text-sm w-full"
       />
+      <select
+        value={form.categoryId}
+        onChange={(e) => setForm({ ...form, categoryId: e.target.value })}
+        className="border border-gray-200 rounded-lg py-2 pl-2 text-sm w-full"
+      >
+        <option value="">Select Category</option>
+        {categories.map((category) => (
+          <option key={category.id} value={category.id}>
+            {category.name}
+          </option>
+        ))}
+      </select>
       <select
         value={form.paymentType}
         onChange={(e) => setForm({ ...form, paymentType: e.target.value })}

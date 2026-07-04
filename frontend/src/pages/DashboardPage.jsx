@@ -1,7 +1,7 @@
 import useDashboard from "../hooks/useDashboard";
 
 function DashboardPage() {
-  const { data, loading, error } = useDashboard(6, 6, 2026);
+  const { data, loading, error } = useDashboard(6, 7, 2026);
   if (loading) return <p className="text-center mt-10">Loading...</p>;
   if (error)
     return (

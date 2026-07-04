@@ -6,7 +6,7 @@ import TransactionCard from "../components/TransactionCard";
 import MonthSelector from "../components/MonthSelector";
 
 function TransactionsPage() {
-  const [month, setMonth] = useState(6);
+  const [month, setMonth] = useState(7);
   const [year, setYear] = useState(2026);
   const [showForm, setShowForm] = useState(false);
 
